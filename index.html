@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>My First Thing</title>
+        <style>
+            .critical {
+                background: red;
+            }
+            .high {
+                background: orange;
+            }
+            .medium {
+                background: yellow;
+            }
+            .low {
+                background: lightblue;
+            }
+            .eventsContainer {
+                border: 1px dashed black;
+            }
+        </style>
+    </head>
+    <body>
+        <form id="addForm">
+            <label>
+                Event Name:
+                <input type="text" maxlength="20" name="eventName" />
+            </label>
+
+            <label for="severity">Severity</label>
+            <select id="severity">
+                <option value="critical">Critical</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <button type="submit">Add</button>
+        </form>
+
+        <div class="eventsContainer">
+            <ul id="eventList">
+
+            </ul>
+        </div>
+
+        <script>
+            const critical = "critical";
+            const high = "high";
+            const medium = "medium";
+            const low = "low";
+
+            const state = [
+                {
+                    eventName: "Critical Condition",
+                    id: Math.random(),
+                    severity: critical
+                },
+                {
+                    eventName: "Medium Condition",
+                    id: Math.random(),
+                    severity: medium
+                }
+            ];
+
+            for (const x in state) {
+                addEventItem(state[x]);
+            }
+
+            function addEventItem(item) {
+                const el = document.createElement("li");
+                el.textContent = item.eventName;
+                el.classList.add(item.severity);
+                document.getElementById("eventList").appendChild(el);
+            }
+
+            const form = document.getElementById("addForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const severityInput = document.getElementById("severity");
+                const eventNameInput = document.getElementsByName("eventName")[0];
+                const newItem = {
+                    eventName: eventNameInput.value,
+                    id: Math.random(),
+                    severity: severityInput.options[severityInput.selectedIndex].value
+                };
+                state.push(newItem);
+                addEventItem(newItem);
+                e.target.reset();
+            });
+        </script>
+    </body>
+</html>
