@@ -1,6 +1,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { INotificationItem, Severity } from "./types";
+import "./styles.scss";
 import { useState } from "react";
 
 // Step 1: Create NotificationItem component
@@ -30,11 +31,13 @@ interface INotificationListProps {
 
 const NotificationList: React.FunctionComponent<INotificationListProps> = props => {
     return (
-        <ol id={props.eventListId}>
-            {props.events.map(e => (
-                <NotificationItem eventName={e.eventName} key={e.id} severity={e.severity} />
-            ))}
-        </ol>
+        <div className={"notification-list"}>
+            <ol id={props.eventListId}>
+                {props.events.map(e => (
+                    <NotificationItem eventName={e.eventName} key={e.id} severity={e.severity} />
+                ))}
+            </ol>
+        </div>
     );
 }
 
