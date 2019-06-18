@@ -1,20 +1,15 @@
-.notification-list {
-  background-color: whitesmoke;
-  border: 1px solid black;
+.critical {
+  color: red;
+}
 
-  .critical {
-    color: red;
-  }
+.high {
+  color: orange;
+}
 
-  .high {
-    color: orange;
-  }
+.medium {
+  color: yellow;
+}
 
-  .medium {
-    color: yellow;
-  }
-
-  .low {
-    color: lightblue;
-  }
+.low {
+  color: lightblue;
 }
