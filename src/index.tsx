@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import AddNotification from "./components/AddNotification";
 import NotificationList from "./components/NotificationList";
 import { INotificationItem } from "./types";
-import "./styles.scss";
+
 const { useState } = React;
 
 const App: React.FunctionComponent = () => {
