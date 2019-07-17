@@ -2,7 +2,6 @@ import * as React from "react";
 import { createStyles, Theme, withStyles, WithStyles } from "@material-ui/core/styles";
 import { INotificationItem, Severity } from "../../types";
 
-// Step 2: create the styles variable here
 const styles = (theme: Theme) => createStyles({
   critical: {
     color: "red"
@@ -31,7 +30,6 @@ function getSeverityClass(severity: string, classes: Record<"critical" | "medium
   }
 }
 
-// Step 3: extend the props to use your styles
 export interface INotificationItemProps extends WithStyles<typeof styles> {
   className?: string;
   event: INotificationItem;
@@ -40,7 +38,6 @@ export interface INotificationItemProps extends WithStyles<typeof styles> {
 
 const NotificationItem: React.FunctionComponent<INotificationItemProps> = props => {
   return (
-    // Step 4: Update the list to use the styles
     <li className={getSeverityClass(props.event.severity, props.classes)}>
       {typeof props.onRemove === "function" && (
         <button onClick={props.onRemove} title="Remove" type="button">X</button>
@@ -50,5 +47,4 @@ const NotificationItem: React.FunctionComponent<INotificationItemProps> = props 
   );
 }
 
-// Step 5: Set your component to be rendered with your styles
 export default withStyles(styles)(NotificationItem);
