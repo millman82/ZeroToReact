@@ -31,7 +31,6 @@ function getSeverityClass(severity: string, classes: Record<"critical" | "medium
 }
 
 export interface INotificationItemProps extends WithStyles<typeof styles> {
-  className?: string;
   event: INotificationItem;
   onRemove?: () => void;
 }

@@ -1,12 +1,9 @@
 import * as React from "react";
 import { INotificationItem, Severity } from "../../types";
-const { useState } = React;
+import NotificationContext from "../../contexts/notificationContext/NotificationContext";
+const { useState, useContext } = React;
 
-export interface IAddNotificationProps {
-  onSubmit(event: INotificationItem): void;
-}
-
-const AddNotification: React.FunctionComponent<IAddNotificationProps> = props => {
+const AddNotification: React.FunctionComponent = () => {
   const [eventName, setEventName] = useState<string>("");
   const [severity, setSeverity] = useState<Severity>(Severity.Critical);
 
@@ -15,6 +12,8 @@ const AddNotification: React.FunctionComponent<IAddNotificationProps> = props =>
     setSeverity(Severity.Critical);
   }
 
+  const context = useContext(NotificationContext);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const event: INotificationItem = {
@@ -22,7 +21,7 @@ const AddNotification: React.FunctionComponent<IAddNotificationProps> = props =>
       id: Math.random(),
       severity
     };
-    props.onSubmit(event);
+    context.add(event);
     handleReset();
   };
 

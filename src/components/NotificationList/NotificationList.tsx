@@ -1,7 +1,7 @@
 import * as React from "react";
-import { INotificationItem } from "../../types";
-import NotificationItem from "../NotificationItem";
 import { createStyles, Theme, withStyles, WithStyles } from "@material-ui/core/styles";
+import NotificationItem from "../NotificationItem";
+import NotificationContext from "../../contexts/notificationContext/NotificationContext";
 
 const styles = (theme: Theme) => createStyles({
   eventsContainer: {
@@ -11,16 +11,18 @@ const styles = (theme: Theme) => createStyles({
 });
 
 export interface INotificationListProps extends WithStyles<typeof styles> {
-  events: INotificationItem[];
-  onRemove: (item: INotificationItem) => void;
 }
 
 const NotificationList: React.FunctionComponent<INotificationListProps> = props => {
   return (
     <ol className={props.classes.eventsContainer}>
-      {props.events.map(e => (
-        <NotificationItem event={e} key={e.id} onRemove={() => props.onRemove(e)} />
-      ))}
+      <NotificationContext.Consumer>
+        { (context) =>
+          context.notifications.map(e => (
+            <NotificationItem event={e} key={e.id} onRemove={() => context.remove(e)} />
+          ))
+        }
+      </NotificationContext.Consumer>
     </ol>
   );
 }
